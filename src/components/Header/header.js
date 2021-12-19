@@ -12,7 +12,7 @@ lastName = ''
 {
     return (
         <h1>
-    Hello {firstName}
+    Hello to the react application
         </h1>
     )
 }

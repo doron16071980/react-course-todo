@@ -14,11 +14,6 @@ function App() {
 
       </Header>
 
-      <Header firstName='Doron' lastName='Arnon'>
-
-      </Header>
-
-
       <Login>
 
       </Login>
