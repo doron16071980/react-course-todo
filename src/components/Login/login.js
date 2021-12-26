@@ -1,54 +1,29 @@
 
-import { useState } from 'react';
+import { useLogin } from './useLogin'
 
 export function Login() {
 
-    const [email,setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [user, form, handleLogin, handleChange] = useLogin();
 
-    const [user, setUser] = useState({firstName: '', lastName: '',createdAt:''});
-
-    const handleFormSubmit = (e) => {
-
-        e.preventDefault();
-
-        fetch('https://academeez-login-ex.herokuapp.com/api/users/login',{
-            method:'post',
-            body: JSON.stringify({
-                //email: 'yariv@nerdeez.com',
-                //password: '12345678'
-                email: email,
-                password: password
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-            
-        })
-        .then(response => response.json())
-        .then(data => setUser(data));
-   
+    const handleSubmit = (e) =>
+    {
+        handleLogin(e, form);
     }
 
-    const handleEmailChange = (e) =>
+    const handleFormChange = (e) =>
     {
-        setEmail(e.target.value);
-    }
-
-    const handlePasswordChange = (e) =>
-    {
-        setPassword(e.target.value);
+        handleChange(e);
     }
 
     return (
         
 
-        <form onSubmit={handleFormSubmit}  >
+        <form onSubmit={handleSubmit}  >
             <label htmlFor='email' value='email'>אי מייל</label>
-            <input id="email" type="email" name="email" placeholder="אי מייל" onChange={handleEmailChange}></input>
+            <input id="email" type="email" name="email" value={form.email} placeholder="אי מייל" onChange={handleFormChange}></input>
             <br/>
             <label htmlFor='password' value='password'>סיסמא</label>
-            <input id="password" typ="password" name="password" placeholder="סיסמא" onChange={handlePasswordChange} ></input>
+            <input id="password" typ="password" value={form.password} name="password" placeholder="סיסמא" onChange={handleFormChange} ></input>
             <br/>
             <button type='submit'>שלח</button>
 
